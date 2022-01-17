@@ -69,12 +69,8 @@ owid_south_america <- owid %>% select(location, date,
   drop_na(fully_vax) %>% 
   group_by(location) %>%
   slice_max(date, n=1) %>%
-
-  ungroup()
-  #select(-date)
-
   ungroup() %>%
-  select(-date)
+  # select(-date)
 
 
 owid_south_america

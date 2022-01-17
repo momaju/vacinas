@@ -59,18 +59,23 @@ owid_selected
 # south america countries
 
 owid_south_america <- owid %>% select(location, date,
-                                                       all_vax = people_vaccinated_per_hundred,
-                                                       fully_vax = people_fully_vaccinated_per_hundred,
-                                                       boosted = total_boosters_per_hundred,
-                                                      deaths = total_deaths_per_million) %>%
-  
+                                      all_vax = people_vaccinated_per_hundred,
+                                      fully_vax = people_fully_vaccinated_per_hundred,boosted = total_boosters_per_hundred,
+                                      deaths = total_deaths_per_million,
+                                      boosted = total_boosters_per_hundred) %>%
+
   filter((location %in% c("Colombia", "Brazil", "Peru", "Chile", "Ecuador", "Bolivia",
                           "Uruguay", "Guyana", "Paraguay", "Suriname", "French Guiana","Argentina"))) %>%
   drop_na(fully_vax) %>% 
   group_by(location) %>%
   slice_max(date, n=1) %>%
+
   ungroup()
   #select(-date)
+
+  ungroup() %>%
+  select(-date)
+
 
 owid_south_america
 
